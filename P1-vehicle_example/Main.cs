@@ -1,8 +1,7 @@
 ﻿namespace Practice1
 {
     internal class Program
-    {
-
+    { 
         static void Main()
         {
             Taxi taxi1 = new Taxi("0001 AAA");
