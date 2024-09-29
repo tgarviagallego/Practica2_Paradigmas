@@ -3,13 +3,11 @@
     class City: IMessageWritter
     {
         private string name;
-        private PoliceStation policeStation;
         public List<Taxi> CityTaxis { get; private set; }
 
-        public City(string name, PoliceStation policeStation)
+        public City(string name)
         {
             this.name = name;
-            this.policeStation = policeStation;
             CityTaxis = new List<Taxi>();
         }
 
@@ -30,7 +28,7 @@
 
         public void RemoveTaxiLicense(string plate)
         {
-            taxi = GetTaxiInstance(plate);
+            Taxi taxi = GetTaxiInstance(plate);
             CityTaxis.Remove(taxi);
         }
 
@@ -43,6 +41,7 @@
                     return taxi;
                 }
             }
+            return null;
         }
 
         public string WriteMessage(string message)

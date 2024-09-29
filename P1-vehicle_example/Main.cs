@@ -4,36 +4,42 @@
     { 
         static void Main()
         {
-            Taxi taxi1 = new Taxi("0001 AAA");
-            Taxi taxi2 = new Taxi("0002 BBB");
-            PoliceCar policeCar1 = new PoliceCar("0001 CNP");
-            PoliceCar policeCar2 = new PoliceCar("0002 CNP");
+            City city = new City("Madrid");
+            Console.WriteLine(city.WriteMessage("Created"));
+            PoliceStation policeStation = new PoliceStation("1", city);
+            Console.WriteLine(policeStation.WriteMessage("Created"));
+            city.RegisterNewTaxiLicense("0001 AAA");
+            city.RegisterNewTaxiLicense("0002 BBB");
 
-            Console.WriteLine(taxi1.WriteMessage("Created"));
-            Console.WriteLine(taxi2.WriteMessage("Created"));
-            Console.WriteLine(policeCar1.WriteMessage("Created"));
-            Console.WriteLine(policeCar2.WriteMessage("Created"));
+            policeStation.RegisterNewPoliceCar("0001 CNP");
+            policeStation.RegisterNewPoliceCar("0002 CNP");
 
-            policeCar1.StartPatrolling();
-            policeCar1.UseRadar(taxi1);
+           
+            Console.WriteLine(city.CityTaxis[0].WriteMessage("Created"));
+            Console.WriteLine(city.CityTaxis[1].WriteMessage("Created"));
+            Console.WriteLine(policeStation.StationPoliceCars[0].WriteMessage("Created"));
+            Console.WriteLine(policeStation.StationPoliceCars[1].WriteMessage("Created"));
 
-            taxi2.StartRide();
-            policeCar2.UseRadar(taxi2);
-            policeCar2.StartPatrolling();
-            policeCar2.UseRadar(taxi2);
-            taxi2.StopRide();
-            policeCar2.EndPatrolling();
+            policeStation.StationPoliceCars[0].StartPatrolling();
+            policeStation.StationPoliceCars[0].UseRadar(city.CityTaxis[0]);
 
-            taxi1.StartRide();
-            taxi1.StartRide();
-            policeCar1.StartPatrolling();
-            policeCar1.UseRadar(taxi1);
-            taxi1.StopRide();
-            taxi1.StopRide();
-            policeCar1.EndPatrolling();
+            city.CityTaxis[1].StartRide();
+            policeStation.StationPoliceCars[1].UseRadar(city.CityTaxis[1]);
+            policeStation.StationPoliceCars[1].StartPatrolling();
+            policeStation.StationPoliceCars[1].UseRadar(city.CityTaxis[1]);
+            city.CityTaxis[1].StopRide();
+            policeStation.StationPoliceCars[1].EndPatrolling();
 
-            policeCar1.PrintRadarHistory();
-            policeCar2.PrintRadarHistory();
+            city.CityTaxis[0].StartRide();
+            city.CityTaxis[0].StartRide();
+            policeStation.StationPoliceCars[0].StartPatrolling();
+            policeStation.StationPoliceCars[0].UseRadar(city.CityTaxis[0]);
+            city.CityTaxis[0].StopRide();
+            city.CityTaxis[0].StopRide();
+            policeStation.StationPoliceCars[0].EndPatrolling();
+
+            policeStation.StationPoliceCars[0].PrintRadarHistory();
+            policeStation.StationPoliceCars[1].PrintRadarHistory();
 
         }
     }

@@ -26,7 +26,7 @@
                 Console.WriteLine(WriteMessage($"Triggered radar. Result: {meassurement}"));
                 if (meassurement == "Catched above legal speed.")
                 {
-                    policeStation.SendAlarm(vehicle.GetPlate());
+                    policeStation.SendAlarm(speedRadar.GetPlateFromRadar());
                     isChasingCar = true;
                 }
             }
@@ -36,9 +36,15 @@
             }
         }
 
-        public bool ChaseCar(Vehicle vehicle)
+        public void ChaseCar(string plate)
         {
-            UseRadar(vehicle);
+            speedRadar.SetPlateFromRadar(plate);
+            isChasingCar = true;
+        }
+
+        public void StopChasingCar()
+        {
+            isChasingCar = false;
         }
 
         public bool IsPatrolling()

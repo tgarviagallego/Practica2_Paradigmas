@@ -3,16 +3,12 @@
     class PoliceStation: IMessageWritter
     {
         public List<PoliceCar> StationPoliceCars { get; private set; }
-        private bool alert;
-        private string chasedCarPlate;
         private string id;
         private City city;
 
         public PoliceStation(string id, City city)
         {
             StationPoliceCars = new List<PoliceCar>();
-            alert = false;
-            chasedCarPlate = "";
             this.id = id;
             this.city = city;
         }
@@ -32,35 +28,21 @@
             return city;
         }
 
-        public void SetChasedCarPlate(string plate)
-        {
-            chasedCarPlate = plate;
-        }
-
         public void SendAlarm(string plate)
         {
-            SetChasedCarPlate(plate);
             foreach (PoliceCar policeCar in StationPoliceCars)
             {
                 if (policeCar.IsPatrolling())
                 {
-                    policeCar.IsChasingCar(GetCity().GetTaxiInstance(plate));
+                    policeCar.ChaseCar(plate);
                 }
             }
-            alert = true;
-        }
-
-        public void DeactivateAlarm()
-        {
-            alert = false;
         }
 
         public void RegisterNewPoliceCar(string plate)
         {
-            StationPoliceCars.Add(new PoliceCar(plate));
+            StationPoliceCars.Add(new PoliceCar(plate, this));
         }
-
-        private List<Taxi> taxiList;
 
         public string WriteMessage(string message)
         {
