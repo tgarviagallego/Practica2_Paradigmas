@@ -26,10 +26,11 @@
             CityTaxis.Add(new Taxi(plate));
         }
 
-        public void RemoveTaxiLicense(string plate)
+        public string RemoveTaxiLicense(string plate)
         {
             Taxi taxi = GetTaxiInstance(plate);
             CityTaxis.Remove(taxi);
+            return WriteMessage($"removed license of taxi with plate {plate}.");
         }
 
         public Taxi GetTaxiInstance(string plate)

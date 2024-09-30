@@ -30,6 +30,7 @@
 
         public void SendAlarm(string plate)
         {
+            Console.WriteLine(WriteMessage($"sent alarm to chase car with plate {plate}."));
             foreach (PoliceCar policeCar in StationPoliceCars)
             {
                 if (policeCar.IsPatrolling())
@@ -39,9 +40,9 @@
             }
         }
 
-        public void RegisterNewPoliceCar(string plate)
+        public void RegisterNewPoliceCar(string plate, bool hasSpeedRadar)
         {
-            StationPoliceCars.Add(new PoliceCar(plate, this));
+            StationPoliceCars.Add(new PoliceCar(plate, this, hasSpeedRadar));
         }
 
         public string WriteMessage(string message)
