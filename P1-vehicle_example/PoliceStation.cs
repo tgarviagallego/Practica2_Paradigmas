@@ -23,11 +23,6 @@
             return id;
         }
 
-        public City GetCity()
-        {
-            return city;
-        }
-
         public void SendAlarm(string plate)
         {
             Console.WriteLine(WriteMessage($"sent alarm to chase car with plate {plate}."));

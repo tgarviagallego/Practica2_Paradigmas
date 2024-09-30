@@ -33,6 +33,10 @@
 
             Console.WriteLine(city.RemoveTaxiLicense("0001 AAA"));
 
+            policeStation.StationPoliceCars[0].StopChasingCar();
+            policeStation.StationPoliceCars[1].StopChasingCar();
+            policeStation.StationPoliceCars[2].StopChasingCar();
+
             policeStation.StationPoliceCars[0].EndPatrolling();
             policeStation.StationPoliceCars[1].EndPatrolling();
             policeStation.StationPoliceCars[2].EndPatrolling();

@@ -28,21 +28,24 @@
 
         public string RemoveTaxiLicense(string plate)
         {
-            Taxi taxi = GetTaxiInstance(plate);
-            CityTaxis.Remove(taxi);
-            return WriteMessage($"removed license of taxi with plate {plate}.");
-        }
-
-        public Taxi GetTaxiInstance(string plate)
-        {
-            foreach (Taxi taxi in CityTaxis)
+            bool foundTaxi = false;
+            for (int i=0; i<CityTaxis.Count; i++)
             {
-                if (taxi.GetPlate() == plate)
+                if (CityTaxis[i].GetPlate() == plate)
                 {
-                    return taxi;
+                    CityTaxis.Remove(CityTaxis[i]);
+                    foundTaxi = true;
+                    return WriteMessage($"removed license of taxi with plate {plate}.");
                 }
             }
-            return null;
+            if (foundTaxi)
+            {
+                return WriteMessage($"removed license of taxi with plate {plate}.");
+            }
+            else
+            {
+                return WriteMessage($"no taxi found with plate {plate}");
+            }
         }
 
         public string WriteMessage(string message)
