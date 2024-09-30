@@ -54,6 +54,10 @@
                 isChasingCar = true;
                 Console.WriteLine(WriteMessage($"started chasing car with plate {plate}."));
             }
+            else
+            {
+                Console.WriteLine(WriteMessage($"has no radar to chase car with plate {plate}."));
+            }
         }
 
         public void StopChasingCar()
