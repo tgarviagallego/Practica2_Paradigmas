@@ -35,7 +35,6 @@
                 {
                     CityTaxis.Remove(CityTaxis[i]);
                     foundTaxi = true;
-                    return WriteMessage($"removed license of taxi with plate {plate}.");
                 }
             }
             if (foundTaxi)
